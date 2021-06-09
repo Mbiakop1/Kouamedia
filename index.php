@@ -20,6 +20,7 @@ require 'config/config.php';
 </head>
 
 <body>
+    <h1> welcome to Kouamedia</h1>
 
 </body>
 
