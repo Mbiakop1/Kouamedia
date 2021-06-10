@@ -115,10 +115,10 @@ if(isset($_POST['register_button'])){
         $rand = rand(1,2);
         if($rand == 1){
 
-            $profile_pic = "Assets/images/profile_pics/defaults/head_deep_blue";
+            $profile_pic = "Assets/images/profile_pics/defaults/head_deep_blue.png";
         }
         else if ( $rand == 2){
-            $profile_pic = "Assets/images/profile_pics/defaults/head_pete_river";
+            $profile_pic = "Assets/images/profile_pics/defaults/head_pete_river.png";
 
         }
         

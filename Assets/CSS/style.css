@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text&family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+a {
+    text-decoration: none;
+}
+
 .top_bar {
     width: 100%;
     height: 40px;
@@ -7,10 +11,13 @@
     min-width: 1015px;
     margin: 0 0 10px 0;
     display: inline-flex;
+    position: fixed;
+    z-index: 10;
 }
 
 body {
     line-height: 17px;
+    background-color: #e6eae8;
 }
 
 .logo a {
@@ -21,13 +28,11 @@ body {
     position: relative;
     color: #059045;
     text-shadow: #7af0b1 0.5px 0.5px 0px;
-    text-decoration: none;
 }
 
 nav a {
     position: relative;
     color: #fff;
-    text-decoration: none;
     font-size: 17px;
     margin: 5px;
 }
@@ -41,4 +46,80 @@ nav {
 
 nav a:hover {
     color: #059045;
+}
+
+.wrapper {
+    margin: 0 auto;
+    top: 50px;
+    position: relative;
+    padding: 0 10px;
+    width: 75%;
+    min-width: 950px;
+}
+
+.column {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #D3D3D3;
+    border-radius: 6px;
+    box-shadow: 2px 2px 1px #d3d3d3;
+    z-index: -1;
+}
+
+.user_details {
+    width: 250px;
+    float: left;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.user_details_left_right {
+    width: 125px;
+}
+
+.user_details img {
+    height: 125px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.main_column {
+    float: right;
+    width: 70%;
+    z-index: -1;
+    min-height: 60px;
+}
+
+.post_form {
+    width: 100%;
+}
+
+.post_form textarea {
+    width: 85%;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 5px;
+    border: 1px solid #D3D3D3;
+    font-size: 12px;
+    outline: none;
+    padding: 5px;
+}
+
+.post_form input[type="submit"] {
+    width: 8%;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color: #049e4c;
+    color: #fff;
+    font-family: 'Bellota ', cursive, sans-serif;
+    text-shadow: #7af0b1 0.5px 0.5px 0px;
+    font-size: 90%;
+    position: absolute;
+    outline: none;
+    margin: 0;
+}
+
+.post_form input[type="submit"]:active {
+    padding: 5px 4px 4px 5px;
 }
