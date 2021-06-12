@@ -48,6 +48,10 @@ class Post {
     }
 
     public function loadPostsFriends(){
+           
+          $page = $data['page'];
+          
+
           $str = ""; //String to return
           $data  = mysqli_query($this->con, "SELECT * FROM posts WHERE  deleted='no' ORDER BY id DESC");
 
