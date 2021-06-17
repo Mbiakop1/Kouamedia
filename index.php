@@ -43,7 +43,7 @@ if(isset($_POST['post'])){
     <div class="posts_area">
 
     </div>
-    <img id="loading" src="./Assets/images/icons/loading.gif" alt="Loading...">
+    <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
 
 
 
@@ -75,14 +75,15 @@ $(document).ready(function() {
         var noMorePosts = $('.posts_area').find('.noMorePosts').val();
 
 
-        if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) &&
+        if ((document.body.scrollHeight == window.pageYOffset + window.innerHeight) &&
             noMorePosts == 'false') {
             $('#loading').show();
 
+
             var ajaxReq = $.ajax({
-                url: "includes/handlers/ajax_load_posts.php",
+                url: "./includes/handlers/ajax_load_posts.php",
                 type: "POST",
-                data: "page" + page + "&userLoggedIn=" + userLoggedIn,
+                data: "page=" + page + "&userLoggedIn=" + userLoggedIn,
                 cache: false,
 
                 success: function(response) {
@@ -90,10 +91,10 @@ $(document).ready(function() {
                     $('.posts_area').find('.noMorePosts').remove();
 
 
-                    $('#loading').hidden();
+                    $('#loading').hide();
                     $('.posts_area').append(response);
                 }
-            })
+            });
 
 
         } //end if
@@ -107,6 +108,9 @@ $(document).ready(function() {
 
 <!----- closing tag for wrapper div in the header--------->
 </div>
+
+
+
 </body>
 
 </html>

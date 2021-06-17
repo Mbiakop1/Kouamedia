@@ -8,5 +8,5 @@ $limit = 10; // number of pot to be loaded
 
 
 $post = new Post($con, $_REQUEST['userLoggedIn']);
-$post->loadPostsFriends();
+$post->loadPostsFriends($_REQUEST, $limit);
 ?>
