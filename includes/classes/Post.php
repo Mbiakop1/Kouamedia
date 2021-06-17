@@ -91,21 +91,27 @@ class Post {
                         if($added_by_obj->isClosed()){
                             continue;
                         }
-                         if($num_iterations++ < $start){
-                             continue;
-                         }
 
+                        $user_logged_obj = new User($this->con, $userLoggedIn);
 
-                         //once 10 posts have been loaded , brake
-                         if($count > $limit){
+                        if($user_logged_obj->isFriend($added_by)){
+
+                            
+                            if($num_iterations++ < $start){
+                                continue;
+                            }
+                            
+                            
+                            //once 10 posts have been loaded , brake
+                            if($count > $limit){
                              break;
-                         } else {
-                             $count++;
-                         }
+                            } else {
+                                $count++;
+                            }
 
-
-                        $user_details_query = mysqli_query(
-                            $this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
+                            
+                            $user_details_query = mysqli_query(
+                                $this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
                             $user_row = mysqli_fetch_array($user_details_query);
                             $first_name = $user_row['first_name'];
                             $last_name = $user_row['last_name'];
@@ -182,10 +188,10 @@ class Post {
                                 else {
                                     $time_massage = $interval->s . " Seconds ago";
                                 }
-                    }
-                    
-                    
-                    $str .= "<div class ='status_post'>
+                            }
+                            
+                            
+                            $str .= "<div class ='status_post'>
                                 <div class='post_profile_pic'>
                                 <img src='$profile_pic' width='50px'>
                                 </div>
@@ -199,21 +205,22 @@ class Post {
                                 <br>
                                 </div>  
                                 
-                            </div>
-                            <hr>" ;
-
-                            
-                            
+                                </div>
+                                <hr>" ;
+                                
+                                
                             }
-
-                        if($count > $limit){
-                            $str .= "<input type='hidden' class='nextPage' value='" .($page + 1) . "'>
-                                   <input type='hidden' class='noMorePosts' value='false'>";
-                                     
-                        } else {
-                                 
-                        $str .= "<input type='hidden' class='noMorePosts' value='true'><p style='text-align: center;'> No more posts to show</p>";
-
+                                
+                    } // end of while loop.
+                            
+                            if($count > $limit){
+                                $str .= "<input type='hidden' class='nextPage' value='" .($page + 1) . "'>
+                                <input type='hidden' class='noMorePosts' value='false'>";
+                                
+                            } else {
+                                
+                                $str .= "<input type='hidden' class='noMorePosts' value='true'><p style='text-align: center;'> No more posts to show</p>";
+                                
                         }   
 
                     }
