@@ -145,6 +145,7 @@ nav a:hover {
 #comment_iframe {
 max-height:250px;
 width:100%;
+margin-top:5px;
 
 }
 
@@ -185,4 +186,11 @@ width:13%;
 height:39px;
 margin-top:3px;
 position:absolute;
+}
+
+.newsfeedPostOptions{
+    padding: 0px;
+    text-decoration:none;
+    color:#0d84fd;
+    border:none;
 }

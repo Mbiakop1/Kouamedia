@@ -196,7 +196,7 @@ echo "<p>Comment Posted!</p>";
           }
       }
       else {
-          echo "<center> <br><br>No Comments Yet!</center>"
+          echo "<center> <br><br>No Comments Yet!</center>";
       }
     
     ?>

@@ -134,7 +134,7 @@ function toggle<?php echo $id;?>() {
 
 <?php
    
-   $comments_check = mysqli_query($con, "SELECT * FROM comments WHERE post_id='$post_id'");\
+   $comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
    $comments_check_num = mysqli_num_rows($comments_check);
 
 
@@ -224,8 +224,14 @@ function toggle<?php echo $id;?>() {
                                 <div id='post_body'>
                                 $body
                                 <br>
-                                </div>  
-                                
+                                </div>
+                                <br><br>
+
+                                <div class='newsfeedPostOptions'>
+                                  Comments($comments_check_num) &nbsp;&nbsp;&nbsp;
+
+                                </div>
+
                                 </div>
 
                                 <div class='post_comment' id='toggleComment$id' style='display:none;'>
