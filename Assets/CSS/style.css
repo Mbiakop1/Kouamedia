@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Bellota+Text&family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
 a {
     text-decoration: none;
 }
@@ -143,54 +142,79 @@ nav a:hover {
 }
 
 #comment_iframe {
-max-height:250px;
-width:100%;
-margin-top:5px;
-
+    max-height: 250px;
+    width: 100%;
+    margin-top: 5px;
 }
 
-.comment_section{
-    padding:0 5px 5px 5px;
-
+.comment_section {
+    padding: 0 5px 5px 5px;
 }
 
-.comment_section a{
-    text-decoration:none;
-    color:#0e7dde
+.comment_section a {
+    text-decoration: none;
+    color: #0e7dde
 }
-
 
 .comment_section img {
-    margin:0px 3px 3px 3px;
-    border-radius:3px ;
-
+    margin: 0px 3px 3px 3px;
+    border-radius: 3px;
 }
 
-#comment_form textarea{
-width:85%;
-height:35px;
-border-radius:5px;
-color: #616060;
-font-size:14px;
-margin:3px 3px 3px 5px;
-outline:none;
-border-color:#D3D3D3;
+#comment_form textarea {
+    width: 85%;
+    height: 35px;
+    border-radius: 5px;
+    color: #616060;
+    font-size: 14px;
+    margin: 3px 3px 3px 5px;
+    outline: none;
+    border-color: #D3D3D3;
 }
 
-#comment_form input[type="submit"]{
-border:none;
-background-color: #049e4c;
-color:#fff;
-border-radius:5px;
-width:13%;
-height:39px;
-margin-top:3px;
-position:absolute;
+#comment_form input[type="submit"] {
+    border: none;
+    background-color: #049e4c;
+    color: #fff;
+    border-radius: 5px;
+    width: 13%;
+    height: 39px;
+    margin-top: 3px;
+    position: absolute;
 }
 
-.newsfeedPostOptions{
+.newsfeedPostOptions {
     padding: 0px;
-    text-decoration:none;
-    color:#0d84fd;
-    border:none;
+    text-decoration: none;
+    color: #0d84fd;
+    border: none;
+}
+
+
+/* styling the likes iframe*/
+
+#like_frame {
+    height: 17px;
+    width: 120px;
+    border: 0px;
+}
+
+.comment_like {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    color: #059045;
+    padding: 0px;
+    height: auto;
+    width: auto;
+    margin: 0px;
+}
+
+.comment_like:hover {
+    cursor: pointer;
+}
+
+.like_value {
+    display: inline;
+    font-size: 14px;
 }
