@@ -218,3 +218,45 @@ nav a:hover {
     display: inline;
     font-size: 14px;
 }
+
+
+/****styling the profile page****/
+
+.profile_left {
+    top: -10px;
+    width: 17%;
+    max-width: 240px;
+    height: 100vh;
+    float: left;
+    position: relative;
+    /* background-color: #059045; */
+    background-color: rgba(25, 199, 92, 0.7);
+    border-right: solid 10px #0ca754;
+    color: #CBEAF8;
+    margin-left: 20px;
+}
+
+.profile_left img {
+    min-width: 80px;
+    width: 55%;
+    margin: 20px;
+    border: 5px solid #0ca754;
+    border-radius: 100px;
+}
+
+.profile_left .profile_info {
+    display: list-item;
+    background-color: #059045;
+    width: 100%;
+    padding: 10px 0 10px 0;
+}
+
+.profile_left .profile_info p {
+    margin: 0 0 0 20px;
+    word-wrap: break-word;
+}
+
+.wrapper {
+    margin-left: 0px;
+    padding-left: 0px;
+}
