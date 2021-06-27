@@ -228,7 +228,7 @@ function toggle<?php echo $id;?>() {
                                 </div>
                                 
                                 <div id='post_body'>
-                                $body
+                                 $body
                                 <br>
                                 </div>
                                 <br><br>
@@ -270,5 +270,5 @@ function toggle<?php echo $id;?>() {
         
     }
     
-
+    
 ?>

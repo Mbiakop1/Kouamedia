@@ -1,8 +1,7 @@
 <?php
 
 include("header.php");
-include("./includes/classes/User.php");
-include("./includes/classes/Post.php");
+
 
 
 
@@ -14,6 +13,7 @@ if(isset($_POST['post'])){
 }
    
 ?>
+
 
 <div class="user_details column">
     <a href="<?php echo $userLoggedIn;?>"> <img src="<?php echo $user['profile_pic']?>" alt="Profile picture"> </a>
