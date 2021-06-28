@@ -249,6 +249,12 @@ function toggle<?php echo $id;?>() {
                                 
                                 
                             }
+
+                            ?>
+
+<script type="text/javascript"></script>
+
+<?php
                                 
                     } // end of while loop.
                             

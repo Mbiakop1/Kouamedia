@@ -75,18 +75,49 @@ if(isset($_POST['respond_request'])){
         
         
         ?>
+
     </form>
+
+    <input type="submit" class="deep_blue" data-bs-toggle="modal" data-bs-target="#post_form" value="Post Something">
 </div>
+
 
 
 
 <div class="main_column column">
-    <?php
-     echo $username;
-    
-    ?>
-
+    <?php echo $username; ?>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="post_form" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Post Something</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This will appear on the user's profile and also their newsfeed for your friends to see</p>
+                <form class="profile_post" action="" method="POST">
+                    <div class="form-group">
+                        <textarea class="form-control" name="post_body"></textarea>
+                        <input type="hidden" name="user_from" value="<?php echo $userLoggedIn;?>">
+                        <input type="hidden" name="user_to" value="<?php echo $username;?>">
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="submit_profile_post" name="post_button" type="button" class="btn btn-primary">Post</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!----- closing tag for wrapper div in the header--------->
 </div>
