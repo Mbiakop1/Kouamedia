@@ -323,3 +323,7 @@ nav a:hover {
     z-index: -1;
     margin-left: 10px;
 }
+
+.profile_info_bottom {
+    margin: 10px 0px 0px 7px;
+}
