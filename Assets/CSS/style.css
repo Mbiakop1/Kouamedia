@@ -315,3 +315,11 @@ nav a:hover {
     right: -15px;
     position: relative;
 }
+
+.profile_main_column {
+    min-width: 675px;
+    float: left;
+    width: 70%;
+    z-index: -1;
+    margin-left: 10px;
+}

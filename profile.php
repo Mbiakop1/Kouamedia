@@ -84,8 +84,12 @@ if(isset($_POST['respond_request'])){
 
 
 
-<div class="main_column column">
-    <?php echo $username; ?>
+<div class="profile_main_column column">
+    <div class="posts_area">
+
+    </div>
+    <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
+
 </div>
 
 
@@ -118,6 +122,66 @@ if(isset($_POST['respond_request'])){
 </div>
 
 
+<script>
+var userLoggedIn = '<?php echo $userLoggedIn?>';
+
+var profileUsername = "<?php  echo $username;?>";
+
+$(document).ready(function() {
+    $('#loading').show();
+
+    // Original ajax request for loading first posts
+
+    $.ajax({
+        url: "./includes/handlers/ajax_load_profile_post.php",
+        type: "POST",
+        data: "page=1&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+        cache: false,
+
+        success: function(data) {
+            $('#loading').hide();
+            $('.posts_area').html(data);
+        }
+    });
+
+    $(window).scroll(function() {
+        var height = $('.posts_area').height(); // div containig post 
+        var scroll_top = $(this).scrollTop();
+        var page = $('.posts_area').find('.nextPage').val();
+        var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+
+        if ((document.body.scrollHeight == window.pageYOffset + window.innerHeight) &&
+            noMorePosts == 'false') {
+            $('#loading').show();
+
+
+            var ajaxReq = $.ajax({
+                url: "./includes/handlers/ajax_load_profile_post.php",
+                type: "POST",
+                data: "page=" + page + "&userLoggedIn=" + userLoggedIn + "&profileUsername=" +
+                    profileUsername,
+                cache: false,
+
+                success: function(response) {
+                    $('.posts_area').find('.nextPage').remove(); // remove current .nextpage
+                    $('.posts_area').find('.noMorePosts').remove();
+
+
+                    $('#loading').hide();
+                    $('.posts_area').append(response);
+                }
+            });
+
+
+        } //end if
+
+        return false;
+
+    }); // end $(document).ready(function())
+
+})
+</script>
 
 <!----- closing tag for wrapper div in the header--------->
 </div>
