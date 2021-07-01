@@ -36,6 +36,8 @@ else {
     </script>
     <script src="./Assets/js/kouam.js"></script>
     <script src="./Assets/js/bootbox.min.js"></script>
+    <script src="./Assets/js/jcrop_bits.js"></script>
+    <script src="./Assets/js/jquery.Jcrop.js"></script>
 
     <!------------------ Connecting to bootstrap----- css ------------------------>
 
@@ -44,6 +46,8 @@ else {
 
     <!---- link style.css----->
     <link rel="stylesheet" href="./Assets/CSS/style.css">
+    <link rel="stylesheet" href="./Assets/CSS/jquery.Jcrop.css">
+
 
 
 
