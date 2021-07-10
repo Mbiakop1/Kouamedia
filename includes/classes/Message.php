@@ -14,7 +14,7 @@ class Message {
     public function getMostRecentUser(){
 
         $userLoggedIn = $this->user_obj->getUserName();
-
+        
         $query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE
          user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC LIMIT 1");
 
@@ -22,7 +22,7 @@ class Message {
              return false;
          }
 
-         $row = mysqli_fetch_all($query);
+         $row = mysqli_fetch_array($query);
 
          $user_to = $row['user_to'];
          $user_from = $row['user_from'];
@@ -34,6 +34,15 @@ class Message {
              return $user_from;
          }
 
+    }
+
+
+
+    public function sendMessage($user_to, $body, $date){
+        if($body != ""){
+            $userLoggedIn = $this->user_obj->getUserName();
+            $query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");
+        }
     }
 }
 ?>
