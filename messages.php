@@ -58,6 +58,12 @@ if($user_to != "new"){
 
 if($user_to != "new"){
     echo "<h4> You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a></h4><hr><br>"; 
+
+    echo "<div class='loaded_messages'>";
+    echo $message_obj->getMessages($user_to);
+    echo "</div>";
+} else {
+    echo "<h4> new message </h4>";
 }
 
 ?>
@@ -65,7 +71,7 @@ if($user_to != "new"){
 
 
 
-    <div class="loaded_messages">
+    <div class="message_post">
         <form action="" method="POST">
             <?php
               if($user_to == "new"){
