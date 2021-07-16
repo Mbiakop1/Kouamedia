@@ -377,3 +377,7 @@ nav a:hover {
     overflow: scroll;
     margin-bottom: 10px;
 }
+
+#conversations {
+    flex-direction: column;
+}
