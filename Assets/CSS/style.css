@@ -381,3 +381,21 @@ nav a:hover {
 #conversations {
     flex-direction: column;
 }
+
+.loaded_conversations {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.user_found_messages {
+    border: 1px solid #D3D3D3;
+    padding: 8px 8px 10px 8px;
+}
+
+.user_found_messages:hover {
+    background-color: #D3D3D3;
+}
+
+#grey {
+    color: #474747;
+}
