@@ -87,7 +87,7 @@ nav a:hover {
     float: right;
     width: 70%;
     z-index: -1;
-    min-height: 60px;
+    min-height: 170px;
 }
 
 .post_form {
@@ -398,4 +398,39 @@ nav a:hover {
 
 #grey {
     color: #474747;
+}
+
+
+/* messages.php */
+
+.resultDisplay {
+    padding: 5px 5px 0px 5px;
+    height: 80px;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.resultDisplay a {
+    float: none;
+}
+
+.resultDisplay:hover {
+    background-color: #D3D3D3;
+    text-decoration: none;
+}
+
+.liveSearchProfilePic img {
+    height: 50px;
+    border-radius: 25px;
+    margin: 1px 12px 0px 2px;
+    float: left;
+}
+
+.liveSearchText p {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.liveSearchText {
+    background-color: transparent;
+    color: #21ca70;
 }
