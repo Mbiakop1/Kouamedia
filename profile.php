@@ -35,7 +35,6 @@ if(isset($_POST['respond_request'])){
 }
 </style>
 
-
 <div class="profile_left">
 
     <img src="<?php echo $user_array['profile_pic'];?>" alt="profile_pic">
@@ -95,10 +94,125 @@ if(isset($_POST['respond_request'])){
 
 
 <div class="profile_main_column column">
-    <div class="posts_area">
 
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Newsfeed</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                role="tab" aria-controls="contact" aria-selected="false">Messages</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div role="tabpanel" class="tab-pane active" id="newsfeed_div">
+                <div class="posts_area"></div>
+
+                <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+            <div role="tabpanel" class="tab-pane " id="about_div">
+                <h1>hiiii</h1>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div role="tabpanel" class="tab-pane " id="messages_div">
+                <?php
+
+            $message_obj = new Message($con, $userLoggedIn);
+                    echo "<h4> You and <a href='" .$username ."'>" . $profile_user_obj->getFirstAndLastName() . "</a></h4><hr><br>"; 
+
+                    echo "<div class='loaded_messages' id='scroll_messages'>";
+                    echo $message_obj->getMessages($username);
+                    echo "</div>";
+            ?>
+
+                <div class="message_post">
+                    <form action="" method="POST">
+                        <textarea name='message_body' id='message_textarea'
+                            placeholder='Write your message ...'></textarea>
+                        <input type='submit' name='post_message' class='info' id='message_submit' value='Send'>
+                    </form>
+                </div>
+
+
+                <script>
+                var div = document.getElementById("scroll_messages");
+                div.scrollTop = div.scrollHeight;
+                </script>
+            </div>
+        </div>
     </div>
-    <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
+
+
+
+
+
+    <!-- 
+    <ul class="nav nav-tabs" id="profile" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#newsfeed_div" aria-controls="newsfeed_div" role="tab"
+                data-toggle="tab">Newsfeed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" aria-controls="about_div" role="tab" data-toggle="tab"
+                href="#about_div">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" aria-controls="messages_div" role="tab" data-toggle="tab"
+                href="#messages_div">Messages</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="newsfeed_div">
+            <div class="posts_area"></div>
+
+            <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
+        </div>
+
+
+        <div role="tabpanel" class="tab-pane " id="about_div">
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane " id="messages_div">
+            <?php
+
+            $message_obj = new Message($con, $userLoggedIn);
+                    echo "<h4> You and <a href='" .$username ."'>" . $profile_user_obj->getFirstAndLastName() . "</a></h4><hr><br>"; 
+
+                    echo "<div class='loaded_messages' id='scroll_messages'>";
+                    echo $message_obj->getMessages($username);
+                    echo "</div>";
+            ?>
+
+            <div class="message_post">
+                <form action="" method="POST">
+                    <textarea name='message_body' id='message_textarea'
+                        placeholder='Write your message ...'></textarea>";
+                    <input type='submit' name='post_message' class='info' id='message_submit' value='Send'>";
+                </form>
+            </div>
+
+
+            <script>
+            var div = document.getElementById("scroll_messages");
+            div.scrollTop = div.scrollHeight;
+            </script>
+        </div>
+    </div> -->
+
+
 
 </div>
 
