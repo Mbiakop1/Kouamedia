@@ -1,5 +1,6 @@
 <?php
 include("header.php");
+$message_obj = new Message($con, $userLoggedIn);
 
 
 if(isset($_GET['profile_username'])){
@@ -25,6 +26,21 @@ if(isset($_POST['add_friend'])){
 
 if(isset($_POST['respond_request'])){
     header("Location: requests.php");
+}
+
+if(isset($_POST['post_message'])){
+    if(isset($_POST['message_body'])){
+        $body = mysqli_real_escape_string($con, $_POST["message_body"]);
+        $date = date("Y-m-d H:i:s");
+        $message_obj->sendMessage($username, $body, $date);
+        
+    }
+    $link = "#myTab #contact-tab";
+    echo "<script>
+             $(function(){
+                $('" . $link ."').tab('show');
+             });
+    </script>";
 }
 
 ?>
@@ -100,10 +116,7 @@ if(isset($_POST['respond_request'])){
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
                 role="tab" aria-controls="home" aria-selected="true">Newsfeed</button>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-        </li>
+
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
                 role="tab" aria-controls="contact" aria-selected="false">Messages</button>
@@ -117,17 +130,11 @@ if(isset($_POST['respond_request'])){
                 <img id="loading" width="60px" src="./Assets/images/icons/loading.gif" alt="Loading...">
             </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-            <div role="tabpanel" class="tab-pane " id="about_div">
-                <h1>hiiii</h1>
-            </div>
-        </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
             <div role="tabpanel" class="tab-pane " id="messages_div">
                 <?php
 
-            $message_obj = new Message($con, $userLoggedIn);
                     echo "<h4> You and <a href='" .$username ."'>" . $profile_user_obj->getFirstAndLastName() . "</a></h4><hr><br>"; 
 
                     echo "<div class='loaded_messages' id='scroll_messages'>";
