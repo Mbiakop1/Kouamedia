@@ -444,5 +444,17 @@ nav a:hover {
     position: absolute;
     right: 10px;
     top: 40px;
-    overflow: scro ll;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown_data_window a {
+    margin: 10px;
+    border-bottom: 1px solid #DADADA;
+    padding: 7px;
+}
+
+.dropdown_data_window a:hover {
+    background-color: #bdc3c7;
 }
