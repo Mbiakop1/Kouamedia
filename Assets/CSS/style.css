@@ -458,3 +458,18 @@ nav a:hover {
 .dropdown_data_window a:hover {
     background-color: #bdc3c7;
 }
+
+.notification_badge {
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    background-color: #F00;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10px;
+    position: absolute;
+    left: 8px;
+    top: -5px;
+}
