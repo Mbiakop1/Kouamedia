@@ -63,6 +63,13 @@ else {
         </div>
 
         <nav>
+            <?php
+            //   unread messages
+            $messages = new Message($con, $userLoggedIn);
+            $num_messages = $messages->getUnreadNumber();
+            
+            ?>
+
             <a href="<?php echo $userLoggedIn;?>">
                 <?php echo $user["first_name"]?>
             </a>
@@ -82,6 +89,13 @@ else {
                     <path
                         d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
                 </svg>
+
+                <?php
+                  if($num_messages > 0){
+                      echo '
+                    <span class="notification_badge" id="unread_message">' . $num_messages . '</span>';
+                  }
+                ?>
             </a>
             <a href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell"

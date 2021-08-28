@@ -276,5 +276,13 @@ public function getConvosDropdown($data, $limit){
     return $return_string;
 }
 
+public function getUnreadNumber(){
+
+    $userLoggedIn = $this->user_obj->getUserName();
+    $query = mysqli_query($this->con, "SELECT * FROM messages where viewed='no' AND user_to='$userLoggedIn'");
+
+    return mysqli_num_rows($query);
+}
+
 }
 ?>
