@@ -268,7 +268,7 @@ public function getConvosDropdown($data, $limit){
     // if post were loaded 
 
     if($count > $limit){
-        $return_string.= "<input type='hidden' class='nextPageDropDown' value='" . ($page + 1). "'> <input type='hidden' class='noMoreDropdownData' value='false'>";
+        $return_string.= "<input type='hidden' class='nextPagedropDown' value='" . ($page + 1). "'> <input type='hidden' class='noMoreDropdownData' value='false'>";
     } else {
         $return_string.= "<input type='hidden' class='noMoreDropdownData' value='true'> <p style='text-align:center;'>No more messages to load! </p>";
     }
