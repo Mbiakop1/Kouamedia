@@ -2,6 +2,8 @@
     require 'config/config.php';
     include("./includes/classes/User.php");
     include("./includes/classes/Post.php");
+    include("./includes/classes/Notification.php");
+
 
 
 
@@ -19,42 +21,42 @@
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+ <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="./Assets/CSS/style.css">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title></title>
+     <link rel="stylesheet" href="./Assets/CSS/style.css">
 
-</head>
+ </head>
 
-<body>
+ <body>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Bellota+Text&family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+     <style>
+     @import url('https://fonts.googleapis.com/css2?family=Bellota+Text&family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-*{
-   font-size:12px;
-   font-family: 'Bellota ', cursive, sans-serif;
-}
-</style>
+     * {
+         font-size: 12px;
+         font-family: 'Bellota ', cursive, sans-serif;
+     }
+     </style>
 
-    <script>
-    function toggle() {
-        var element = document.getElementById("comment_section");
-        if (element.style.display == "block") {
-            element.style.display = "none";
-        } else {
-            element.style.display = "block";
-        }
-    }
-    </script>
+     <script>
+     function toggle() {
+         var element = document.getElementById("comment_section");
+         if (element.style.display == "block") {
+             element.style.display = "none";
+         } else {
+             element.style.display = "block";
+         }
+     }
+     </script>
 
 
-    <?php
+     <?php
 //  Get id of post
 
 if(isset($_GET['post_id'])){
@@ -66,6 +68,7 @@ if(isset($_GET['post_id'])){
     $row = mysqli_fetch_array($user_query);
     
     $posted_to = $row['added_by'];
+    $user_to = $row['user_to'];
     
     if(isset($_POST['postComments' . $post_id])){
         $post_body = $_POST['post_body'];
@@ -76,6 +79,30 @@ if(isset($_GET['post_id'])){
         $insert_post = mysqli_query($con, "INSERT INTO comments VALUES ('', '$post_body', '$userLoggedIn', '$posted_to', 
       '$date_time_now', 'no', '$post_id')");
 
+    //   insert motification 
+    if($posted_to != $userLoggedIn){
+        $notification = new Notification($con, $userLoggedIn);
+        $notification->insertNotification($post_id, $posted_to, "comment");
+    }
+     if($user_to != 'none' && $user_to != $userLoggedIn){
+        $notification = new Notification($con, $userLoggedIn);
+        $notification->insertNotification($post_id, $user_to, "profile_comment");
+    }
+
+    $get_commenters = mysqli_query($con, "SELECT * FROM comments WHERE  post_id='$post_id'");
+    $notified_users = array();
+    
+    while($row = mysqli_fetch_array($get_commenters)){
+        if($row['posted_by'] != $posted_to && $row['posted_by'] != $user_to
+         && $row['posted_by'] != $userLoggedIn && !in_array($row['posted_by'], $notified_users)){
+          
+            $notification = new Notification($con, $userLoggedIn);
+            $notification->insertNotification($post_id, $row['posted_by'], "comment_non_owner");
+
+            array_push($notified_users, $row['posted_by']);
+        }
+    }
+
 echo "<p>Comment Posted!</p>";
 }
 
@@ -84,19 +111,19 @@ echo "<p>Comment Posted!</p>";
 ?>
 
 
-    <form action="comment_frame.php?post_id=<?php echo $post_id;?>" method="POST"
-        name="postComment<?php echo $post_id?>" id="comment_form">
+     <form action="comment_frame.php?post_id=<?php echo $post_id;?>" method="POST"
+         name="postComment<?php echo $post_id?>" id="comment_form">
 
-        <textarea name="post_body"></textarea>
-        <input type="submit" name="postComments<?php echo $post_id;?>" value="Post">
-
-
-    </form>
-
-    <!------ load comments----->
+         <textarea name="post_body"></textarea>
+         <input type="submit" name="postComments<?php echo $post_id;?>" value="Post">
 
 
-    <?php 
+     </form>
+
+     <!------ load comments----->
+
+
+     <?php 
       $get_comments = mysqli_query($con, "SELECT * FROM comments WHERE post_id='$post_id' ORDER BY id ASC");
       $count = mysqli_num_rows($get_comments);
 
@@ -184,15 +211,15 @@ echo "<p>Comment Posted!</p>";
               $user_obj = new User($con, $posted_by); 
 
     ?>
-              
-             <div class="comment_section">
-                <a href="<?php echo $posted_by?>" target="_parent"><img src="<?php echo $user_obj->getProfilePic();?>"
-                        alt="Profile pic" title="<?php echo $posted_by?>" style="float:left;" height="30px"></a>
-                <a href="<?php echo $posted_by?>" target="_parent"><b><?php echo $user_obj->getFirstAndLastName(); ?></b></a>
-                &nbsp; &nbsp; &nbsp; &nbsp;<?php echo $time_massage . "<br>" . $comment_body?>
-                <hr>
-            </div>
-    <?php
+
+     <div class="comment_section">
+         <a href="<?php echo $posted_by?>" target="_parent"><img src="<?php echo $user_obj->getProfilePic();?>"
+                 alt="Profile pic" title="<?php echo $posted_by?>" style="float:left;" height="30px"></a>
+         <a href="<?php echo $posted_by?>" target="_parent"><b><?php echo $user_obj->getFirstAndLastName(); ?></b></a>
+         &nbsp; &nbsp; &nbsp; &nbsp;<?php echo $time_massage . "<br>" . $comment_body?>
+         <hr>
+     </div>
+     <?php
           }
       }
       else {
@@ -201,6 +228,6 @@ echo "<p>Comment Posted!</p>";
     
     ?>
 
-</body>
+ </body>
 
-</html>
+ </html>
