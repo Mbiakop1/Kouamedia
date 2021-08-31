@@ -90,8 +90,8 @@ public function getNotifications($data, $limit, ){
         }
 
         $user_from = $row['user_from'];
-        $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$user_from'");
-        $user_data = mysqli_fetch_array($query);
+        $user_data_query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$user_from'");
+        $user_data = mysqli_fetch_array($user_data_query);
 
 
 
@@ -171,10 +171,12 @@ public function getNotifications($data, $limit, ){
          $style = (isset($row['opened']) && $row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
 
         $return_string .= "<a href='". $row['link'] ."'>
+                            <div class='resultDisplay resultDisplayNotification' style='" . $style. "'>
                             <div class='notificationsProfilePic'>
                               <img src='". $user_data['profile_pic']."'>   
                             </div>
                             <p class='timestamp_smaller' id='grey'>" . $time_massage ."</p>" . $row['message'] . "
+                            </div>
                             </a>";
     }
 
