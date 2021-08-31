@@ -535,7 +535,234 @@ $(document).ready(function() {
           
         }
 
-                }
+
+
+    public function getSinglePost($post_id, ){
+
+          $userLoggedIn = $this->user_obj->getUsername();
+         
+          
+
+          $str = ""; //String to return
+          $data_query  = mysqli_query($this->con, "SELECT * FROM posts WHERE  deleted='no' AND id='$post_id'");
+
+          if(mysqli_num_rows($data_query) > 0){
+
+        
+                $row =mysqli_fetch_array($data_query);
+                    $id = $row['id'];
+                    $body = $row['body'];
+                    $added_by = $row['added_by'];
+                    $date_time = $row['date_added'];
+                    
+                    //prepare user to string so it can be included even if not posted to a user
+                    
+                    if($row['user_to'] == "none"){
+                        $user_to = "";
+                        }
+                        else {
+                            $user_to_obj = new User($this->con, $row['user_to']);
+                            $user_to_name = $user_to_obj->getFirstAndLastName();
+                            $user_to = "to <a href='".$row['user_to']."'>" .$user_to_name ."</a>";
+                        }
+                        
+
+                        //Check if user who posted, has their account closed
+                        $added_by_obj = new User($this->con, $added_by);
+                        if($added_by_obj->isClosed()){
+                            return;
+                        }
+
+                        $user_logged_obj = new User($this->con, $userLoggedIn);
+
+                        if($user_logged_obj->isFriend($added_by)){
+                            
+                            
+                            if($userLoggedIn == $added_by){
+                               $delete_button = "<button class='delete_button btn-danger' id='post$id'>Delete</button>";
+                            } else {
+                                $delete_button = "";
+                            }
+
+                            
+                            $user_details_query = mysqli_query(
+                                $this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE username='$added_by'");
+                            $user_row = mysqli_fetch_array($user_details_query);
+                            $first_name = $user_row['first_name'];
+                            $last_name = $user_row['last_name'];
+                            $profile_pic = $user_row['profile_pic'];
+                            
+                            ?>
+
+
+<script>
+function toggle<?php echo $id;?>() {
+    var target = $(event.target);
+    if (!target.is("a")) {
+
+        var element = document.getElementById("toggleComment<?php echo $id ;?>");
+        if (element.style.display == "block") {
+            element.style.display = "none";
+        } else {
+            element.style.display = "block";
+        }
+
+    }
+
+}
+</script>
+
+<?php
+        
+        $comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE post_id='$id'");
+        $comments_check_num = mysqli_num_rows($comments_check);
+
+
+                                    
+                                    // Timeframe
+                                    $date_time_now = date("Y-m-d H:i:s");
+                                    $start_date = new DateTime($date_time); // Time of the post
+                                    $end_date = new DateTime($date_time_now); //Current time
+                                    $interval = $start_date->diff($end_date); // difference btw two dates
+                                    
+                                    if($interval->y >= 1){
+                                        if($interval->y == 1 ){
+                                            $time_massage = $interval->y . " Year ago"; // 1 year ago
+                                            
+                                        } 
+                                        else {
+                                            $time_massage = $interval->y . " Years ago"; // 1+ years ago 
+                                        }
+                                    }
+                                    else if ($interval-> m >= 1){
+                                        if($interval->d == 0){
+                                            $days = " ago";
+                                            
+                                        } 
+                                        else if($interval->d == 1){
+                                            $days = $interval->d . " Day ago";
+                                        }
+                                        else {
+                                            $days = $interval->d . " Days ago";
+                                        }
+                                        
+                                        if($interval->m == 1){
+                                            $time_massage = $interval->m . " Month" . $days;
+                                        } 
+                                        else {
+                                            $time_massage = $interval->m . " Months" . $days;
+                                            
+                                        }
+                                    }
+                                    else if($interval->d >= 1){
+                                        if($interval->d == 1){
+                                            $time_massage = $interval->d . " Day ago";
+                                        }
+                                        else {
+                                            $time_massage = $interval->d . " Days ago";
+                                        }
+                                    }
+                                    else if($interval->h >= 1){
+                                        
+                                        if($interval->h == 1){
+                                            $time_massage = $interval->h . " Hour ago";
+                                        }
+                                        else {
+                                            $time_massage = $interval->h . " Hours ago";
+                                        }
+                                    }
+                                    else if($interval->i >= 1){
+                                        
+                                        if($interval->i == 1){
+                                            $time_massage = $interval->i . " Minute ago";
+                                        }
+                                        else {
+                                            $time_massage = $interval->i . " Minutes ago";
+                                        }
+                                    }
+                                    
+                                    else {
+                                        
+                                        if($interval->s <= 1){
+                                            $time_massage = "Just now";
+                                        }
+                                        else {
+                                            $time_massage = $interval->s . " Seconds ago";
+                                        }
+                                    }
+                                    
+                                    
+                                    $str .= "<div class ='status_post' onClick='javascript:toggle$id()'>
+                                        <div class='post_profile_pic'>
+                                        <img src='$profile_pic' width='50px'>
+                                        </div>
+                                        
+                                        <div class ='posted_by' style='color:#ACACAC;'>
+                                        <a href='$added_by'> $first_name $last_name </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $time_massage
+                                        $delete_button
+                                        </div>
+                                        
+                                        <div id='post_body'>
+                                        $body
+                                        <br>
+                                        </div>
+                                        <br><br>
+
+                                        <div class='newsfeedPostOptions'>
+                                        Comments($comments_check_num) &nbsp;&nbsp;&nbsp;
+
+                                        <iframe id='like_frame' src='like.php?post_id=$id' scrolling='no'></iframe>
+
+                                        </div>
+
+                                        </div>
+
+                                        <div class='post_comment' id='toggleComment$id' style='display:none;'>
+                                        <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+                                        </div>
+                                        <hr>" ;
+                                        
+                                        
+                                    
+
+     ?>
+
+<script>
+$(document).ready(function() {
+    $('#post<?php echo $id;?>').on('click', function() {
+
+        bootbox.confirm("Are your sure you want to delete this post?", function(result) {
+            $.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {
+                result: result
+            });
+            if (result)
+                location.reload();
+        });
+    });
+});
+</script>
+
+
+
+<?php
+
+} else {
+echo "<p>You cannot see this post because you are not friends with this users</p>";
+ }
+                                        
+                                       
+
+                                } 
+                                else {
+                                    echo "<p>No post found, if you clicked a link it may be broken</p>";
+                                }
+                    echo $str;
+                    
+                    
+    }
+
+
+    }
                 
                 
         ?>
