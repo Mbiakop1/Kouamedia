@@ -67,7 +67,7 @@ else {
         <div class="search">
             <form action="search.php" method="GET" name="search_form">
                 <input type="text" name="q" onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn;?>')"
-                    id="search_text_input" placeholder="Search" autocomplete="off">
+                    id="search_text_input" placeholder="Search..." autocomplete="off">
                 <div class="button_holder">
                     <img src="./Assets/images/icons/search.png" alt="">
                 </div>
