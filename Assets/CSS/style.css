@@ -491,3 +491,35 @@ nav a:hover {
     font-size: 85%;
     margin: 0px;
 }
+
+.search {
+    margin: 8px 0 0 15%;
+}
+
+.search #search_text_input {
+    border: thin solid #E5E5E5;
+    float: left;
+    height: 23px;
+    outline: 0;
+    width: 100px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.button_holder {
+    background-color: #f1f1f1;
+    border: thin solid #E5E5E5;
+    cursor: pointer;
+    float: left;
+    height: 23px;
+    text-align: center;
+    width: 50px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.button_holder img {
+    object-fit: contain;
+    margin: 1px;
+    width: 20px;
+}
