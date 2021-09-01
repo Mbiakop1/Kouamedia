@@ -523,3 +523,26 @@ nav a:hover {
     margin: 1px;
     width: 20px;
 }
+
+.search_results {
+    background-color: #fff;
+    border: 1px solid #DADADA;
+    border-bottom: none;
+    border-top: none;
+    margin-top: 21px;
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+
+.search_results_footer {
+    padding: 7x 4px 0px 4px;
+    height: 30px;
+    border: 1px solid #DADADA;
+    border-top: none;
+    background-color: #2ecc71;
+    text-align: center;
+}
+
+.search_results_footer a {
+    color: #fff;
+}
