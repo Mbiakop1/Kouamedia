@@ -577,4 +577,36 @@ nav a:hover {
 }
 
 
+/* styling the settings page */
+
+#small_profile_pics {
+    height: 100px;
+    width: 30%;
+    margin: 1px 12px 0px 2px;
+    float: left;
+}
+
+#settings_input {
+    border: 1px solid #ccc;
+    height: 20px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    line-height: 20px;
+}
+
+.upload_profile_pic {
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+#form_for_settings {
+    margin: 10px;
+}
+
+#main_settings {
+    display: flex;
+    flex-direction: column;
 }
