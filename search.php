@@ -63,6 +63,7 @@ if(mysqli_num_rows($usersReturnedQuery) == 0){
 
 echo "<p id='grey'>Try searching for:</p>";
 echo "<a href='search.php?q=" . $query. "&type=name'>Names</a>,  <a href='search.php?q=" . $query ."&type=username'>Usernames</a><br><br><hr id='search_hr'>";
+echo "<div class='main_container'>";
 
 while($row = mysqli_fetch_array($usersReturnedQuery)){
     $user_obj = new User($con, $user['username']);
@@ -73,14 +74,14 @@ while($row = mysqli_fetch_array($usersReturnedQuery)){
     if($user['username'] != $row['username']){
         // generate button depending on friendship status
         if($user_obj->isFriend($row['username'])){
-            $button = "<input type='subit' name='" . $row['username']. "' class='btn btn-danger' value='Remove Friend'>";
+            $button = "<input type='submit' name='" . $row['username']. "' class='btn btn-danger' value='Remove Friend'>";
         } else if($user_obj->didReceiveRequest($row['username'])){
-            $button = "<input type='subit' name='" . $row['username']. "' class='btn btn-warning' value='Respond to request'>";
+            $button = "<input type='submit' name='" . $row['username']. "' class='btn btn-warning' value='Respond to request'>";
              
         } else if($user_obj->didSendRequest($row['username'])){
-            $button = "<input class='btn-default' value='Request Sent'>";
+            $button = "<input type='button' class='btn btn-light' value='Request Sent'>";
         } else {
-            $button = "<input type='subit' name='" . $row['username']. "' class='btn btn-success' value='Add friend'>";
+            $button = "<input type='submit' name='" . $row['username']. "' class='btn btn-success' value='Add friend'>";
             
         }
 
@@ -88,6 +89,22 @@ while($row = mysqli_fetch_array($usersReturnedQuery)){
 
 
         // button forms
+        if(isset($_POST[$row['username']])){
+            if($user_obj->isFriend($row['username'])){
+                $user_obj->removeFriend($row['username']);
+                header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+
+            } else if($user_obj->didReceiveRequest($row['username'])){
+                header("Location: request.php");
+            } else if($user_obj->didSendRequest($row['username'])){
+
+            } else {
+                $user_obj->sendRequest($row['username']);
+                header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+
+            }
+        }
+
     }
 
     echo "<div class='search_result'>
@@ -113,7 +130,7 @@ while($row = mysqli_fetch_array($usersReturnedQuery)){
 
 } // end of while loop
  
-
+echo "</div>";
 
 
   }

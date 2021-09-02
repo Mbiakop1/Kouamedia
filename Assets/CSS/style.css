@@ -549,7 +549,7 @@ nav a:hover {
 
 .search_result {
     padding: 10px;
-    height: 100px;
+    height: 120px;
 }
 
 .searchPageFriendsButton {
@@ -561,6 +561,20 @@ nav a:hover {
     margin-right: 10px;
 }
 
+.result_profile_pic img {
+    max-height: 120px;
+    max-width: 120px;
+}
+
 #search_hr {
     margin-bottom: 0;
+}
+
+.main_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
 }
