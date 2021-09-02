@@ -26,4 +26,38 @@ if(isset($_POST['update_details'])){
     $message= "";
 }
 
+
+// ************************************************
+
+if(isset($_POST['update_password'])){
+    $old_password = strip_tags($_POST['old_password']);
+    $new_password_1 = strip_tags($_POST['new_password_1']);
+    $new_password_2 = strip_tags($_POST['new_password_2']);
+
+    $password_query = mysqli_query($con, "SELECT Upassword FROM users WHERE username='$userLoggedIn'");
+    $row = mysqli_fetch_array($password_query);
+    $db_password = $row['Upassword'];
+
+    if(md5($old_password) == $db_password){
+
+        if($new_password_1 == $new_password_2){
+
+            if(strlen($new_password_1) <= 4){
+              $password_message = "Sorry, your password must be greater than 4 characters<br><br>";
+            }  else {
+                $new_password_md5 = md5($new_password_1);
+                $password_query = mysqli_query($con, "UPDATE users SET Upassword='$new_password_md5' WHERE username='$userLoggedIn'");
+                $password_message = "Password has been changed";
+            }
+
+        } else {
+            $password_message = "Your two new passwords do not match";
+        }
+    } else {
+         $password_message ="Your old password is incorrect";
+    }
+
+} else {
+    $password_message = "";
+}
 ?>

@@ -40,7 +40,9 @@ include "./includes/form_handlers/settings_handler.php";
     <form action="settings.php" method="POST">
         Old password: <input type="password" name="old_password" required> <br>
         New password: <input type="password" name="new_password_1" required> <br>
-        new possword: <input type="password" name="new_password_2" required><br>
+        New possword: <input type="password" name="new_password_2" required><br>
+        <?php echo $password_message; ?> <br>
+
         <input type="submit" name="update_password" id="save_details" value="Update_password"> <br>
 
     </form>
