@@ -546,3 +546,21 @@ nav a:hover {
 .search_results_footer a {
     color: #fff;
 }
+
+.search_result {
+    padding: 10px;
+    height: 100px;
+}
+
+.searchPageFriendsButton {
+    float: right;
+}
+
+.result_profile_pic {
+    float: left;
+    margin-right: 10px;
+}
+
+#search_hr {
+    margin-bottom: 0;
+}
