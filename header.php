@@ -153,7 +153,7 @@ else {
                   }
                 ?>
             </a>
-            <a href="#">
+            <a href="settings.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-gear"
                     viewBox="0 0 16 16">
                     <path
