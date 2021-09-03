@@ -610,3 +610,11 @@ nav a:hover {
     display: flex;
     flex-direction: column;
 }
+
+
+/* style the trending words section */
+
+.user_details {
+    display: flex;
+    flex-direction: column;
+}
