@@ -187,10 +187,10 @@ function toggle<?php echo $id;?>() {
                                         }
                                         
                                         if($interval->m == 1){
-                                            $time_massage = $interval->m . " Month" . $days;
+                                            $time_massage = $interval->m . " Month " . $days;
                                         } 
                                         else {
-                                            $time_massage = $interval->m . " Months" . $days;
+                                            $time_massage = $interval->m . " Months " . $days;
                                             
                                         }
                                     }
@@ -419,10 +419,10 @@ function toggle<?php echo $id;?>() {
                                 }
                                 
                                 if($interval->m == 1){
-                                    $time_massage = $interval->m . " Month" . $days;
+                                    $time_massage = $interval->m . " Month " . $days;
                                 } 
                                 else {
-                                    $time_massage = $interval->m . " Months" . $days;
+                                    $time_massage = $interval->m . " Months " . $days;
                                     
                                 }
                             }
@@ -647,10 +647,10 @@ function toggle<?php echo $id;?>() {
                                         }
                                         
                                         if($interval->m == 1){
-                                            $time_massage = $interval->m . " Month" . $days;
+                                            $time_massage = $interval->m . " Month " . $days;
                                         } 
                                         else {
-                                            $time_massage = $interval->m . " Months" . $days;
+                                            $time_massage = $interval->m . " Months " . $days;
                                             
                                         }
                                     }
