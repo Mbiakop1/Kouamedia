@@ -13,19 +13,22 @@ $(document).ready(function() {
     // button for profile post
     $('#submit_profile_post').click(function() {
 
-        console.log($('form.profile_post').serialize());
-        $.ajax({
-            type: "POST",
-            url: "./includes/handlers/ajax_submit_profile_post.php",
-            data: $('form.profile_post').serialize(),
-            success: function(msg) {
-                $("#post_form").modal('hide');
-                location.reload();
-            },
-            error: function() {
-                alert('Failure');
-            }
-        });
+        var formData = new FormData(document.getElementById('profile_post'));
+
+        console.log(formData);
+
+        // $.ajax({
+        //     type: "POST",
+        //     url: "./includes/handlers/ajax_submit_profile_post.php",
+        //     data: $('form.profile_post').serialize(),
+        //     success: function(msg) {
+        //         $("#post_form").modal('hide');
+        //         location.reload();
+        //     },
+        //     error: function() {
+        //         alert('Failure');
+        //     }
+        // });
 
     });
 });
@@ -109,4 +112,10 @@ function getLiveSearchUsers(value, user) {
         }
     })
 
+}
+
+
+function myFunction(event) {
+    const filename = event.target.files[0].name;
+    document.getElementById("select_image").textContent = 'File selected: ' + filename;
 }

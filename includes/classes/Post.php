@@ -10,8 +10,12 @@ class Post {
       $this->user_obj = new User($con, $user);
     }
 
-    public function submitPost($body, $user_to){
+    public function submitPost($body, $user_to, $imageName){
 
+         // current date and time   
+            $date_added = date("Y-m-d H:i:s");
+            //get username
+            $added_by = $this->user_obj->getUserName();
         
 
          $body = strip_tags($body);
@@ -45,9 +49,9 @@ class Post {
             if($user_to == $added_by){
                 $user_to = "none";
             }
-
+            // insert post to db
             $query = mysqli_query($this->con, "INSERT INTO posts VALUES(
-                '', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0'
+                '', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
                 )");
                 
                 $returned_id = mysqli_insert_id($this->con);
@@ -95,7 +99,7 @@ class Post {
 	         thus to today together too took toward turn turned turning turns two
 			 u under until up upon us use used uses v very w want wanted wanting
 			 wants was way ways we well wells went were what when where whether
-			 which while who whole whose why will with within without work
+			 which while who whole whose why will with within without hello work
 			 worked working works would x y year years yet you young younger
 			 youngest your yours z lol haha omg hey ill iframe wonder else like 
              hate sleepy morning afternoon evening reason for some little yes bye choose";
@@ -122,8 +126,12 @@ class Post {
                }
 
                 
+         } else if($imageName){
+              $query = mysqli_query($this->con, "INSERT INTO posts VALUES(
+                '', '', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
+                )");
          }
-    }
+    } 
 
     public function calculateTrend($term){
         if($term != ''){
@@ -166,6 +174,7 @@ class Post {
                     $body = $row['body'];
                     $added_by = $row['added_by'];
                     $date_time = $row['date_added'];
+                    $imagePath = $row['image'];
                     
                     //prepare user to string so it can be included even if not posted to a user
                     
@@ -315,6 +324,13 @@ function toggle<?php echo $id;?>() {
                                         }
                                     }
                                     
+                                    if($imagePath != ""){
+                                        $imageDiv = "<div class='postedImage'>
+                                                       <img src='$imagePath'>
+                                                     </div>";
+                                    } else {
+                                        $imageDiv = "";
+                                    }
                                     
                                     $str .= "<div class ='status_post' onClick='javascript:toggle$id()'>
                                         <div class='post_profile_pic'>
@@ -329,6 +345,7 @@ function toggle<?php echo $id;?>() {
                                         <div id='post_body'>
                                         $body
                                         <br>
+                                        $imageDiv
                                         </div>
                                         <br><br>
 

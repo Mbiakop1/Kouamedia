@@ -7,9 +7,49 @@ include("header.php");
 
 
 if(isset($_POST['post'])){
+   $upLoadOk = 1;
+
+   $imageName = $_FILES['fileToUpload']['name'];
+   $errorMessage = "";
+
+   if($imageName != ""){
+       $targetDir = "Assets/images/posts";
+       $imageName = $targetDir . uniqid() . basename($imageName);
+       $imageFileType = pathinfo($imageName, PATHINFO_EXTENSION);
+
+       if($_FILES['fileToUpload']['size'] > 10000000){
+          $errorMessage = "Sorry your file is too large";
+          $upLoadOk = 0;
+       }
+
+       if(strtolower($imageFileType) != "jpeg" && strtolower($imageFileType) != "jpg" && strtolower($imageFileType) != "png"){
+            $errorMessage = "Sorry only jpeg, jpg and png files are allowed";
+          $upLoadOk = 0;
+       }
+
+       if($upLoadOk){
+           if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $imageName)){
+            //    image uploaded
+           } else {
+            //    image did not upload
+            $upLoadOk = 0;
+           }
+       }
+   }
+
+
+ if($upLoadOk){
+   
     $post = new Post($con, $userLoggedIn);
-    $post->submitPost($_POST['post_text'], 'none');
-    header("Location: index.php");
+    $post->submitPost($_POST['post_text'], 'none', $imageName);
+ } else {
+     echo "<div style='text-align:center;' class='alert alert-danger'>
+               $errorMessage
+          </div>";
+ }
+
+
+    // header("Location: index.php");
 }
    
 ?>
@@ -34,7 +74,12 @@ if(isset($_POST['post'])){
 
 <div class="main_column column">
 
-    <form action="index.php" method="POST" class="post_form">
+    <form action="index.php" method="POST" class="post_form" enctype="multipart/form-data">
+        <button id="select_image" class="btn btn-primary" type="button"
+            onclick="document.getElementById('fileToUpload').click()">Add
+            Image</button>
+        <input onchange="myFunction(event)" type="file" name="fileToUpload" id="fileToUpload"
+            style="visibility:hidden;">
         <textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
         <input type="submit" name="post" id="post_button" value="Post">
         <hr>
@@ -63,7 +108,7 @@ if(isset($_POST['post'])){
                 $trimmed_word = str_split($word, 14);
                 $trimmed_word = $trimmed_word[0];
 
-                echo "<div style='padding: 1px'>";
+                echo "<div style='padding: 5px'>";
                 echo  $trimmed_word . $word_dot;
                 echo "<br></div>";
             }
@@ -131,7 +176,11 @@ $(document).ready(function() {
 </div>
 
 
-
+<script>
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}
+</script>
 </body>
 
 </html>

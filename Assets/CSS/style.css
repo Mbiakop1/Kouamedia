@@ -618,3 +618,20 @@ nav a:hover {
     display: flex;
     flex-direction: column;
 }
+
+
+/* styling the posted images */
+
+.postedImage img {
+    object-fit: contain;
+    max-height: 500px;
+    max-width: 100%;
+    display: block;
+}
+
+
+/*  the upload image button */
+
+.main_column form button {
+    margin: 5px;
+}
