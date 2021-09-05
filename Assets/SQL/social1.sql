@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2021 at 11:02 AM
+-- Generation Time: Sep 05, 2021 at 06:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -95,7 +95,10 @@ CREATE TABLE `friend_requests` (
 INSERT INTO `friend_requests` (`id`, `user_to`, `user_from`) VALUES
 (1, 'mogo_mouce_1', 'mbutiji_emanuel'),
 (10, 'momo_me', 'mogo_mouce'),
-(12, 'mogo_mouce_1', 'clinton_clinton');
+(12, 'mogo_mouce_1', 'clinton_clinton'),
+(15, 'mbutiji_emanuel_1', 'mbutiji_emanuel'),
+(17, 'momo_me', 'mbutiji_emanuel'),
+(18, 'mogo_mouce', 'miki_mouce');
 
 -- --------------------------------------------------------
 
@@ -128,7 +131,7 @@ INSERT INTO `likes` (`id`, `username`, `post_id`) VALUES
 (69, 'miki_mouce', 9),
 (70, 'mbutiji_emanuel', 9),
 (71, 'mbutiji_emanuel', 10),
-(72, 'mbutiji_emanuel', 40);
+(78, 'miki_mouce', 44);
 
 -- --------------------------------------------------------
 
@@ -183,7 +186,9 @@ INSERT INTO `messages` (`id`, `user_to`, `user_from`, `body`, `date`, `opened`, 
 (32, 'mogo_mouce', 'mbutiji_emanuel', 'kjlk', '2021-08-28 22:23:57', 'yes', 'yes', 'no'),
 (33, 'mogo_mouce', 'mbutiji_emanuel', 'nkjk', '2021-08-28 22:24:04', 'yes', 'yes', 'no'),
 (34, 'mogo_mouce', 'mbutiji_emanuel', 'hi', '2021-09-01 21:20:22', 'yes', 'yes', 'no'),
-(35, 'mbutiji_emanuel', 'mogo_mouce', 'yes', '2021-09-01 21:20:59', 'yes', 'yes', 'no');
+(35, 'mbutiji_emanuel', 'mogo_mouce', 'yes', '2021-09-01 21:20:59', 'yes', 'yes', 'no'),
+(36, 'mbutiji_emanuel', 'miki_mouce', 'hi man', '2021-09-03 11:48:47', 'yes', 'yes', 'no'),
+(37, 'mbutiji_emanuel', 'miki_mouce', 'yo', '2021-09-03 11:48:54', 'yes', 'yes', 'no');
 
 -- --------------------------------------------------------
 
@@ -215,7 +220,11 @@ INSERT INTO `notifications` (`id`, `user_to`, `user_from`, `message`, `link`, `d
 (6, 'mbutiji_emanuel', 'miki_mouce', 'Miki Mouce liked on your post ', 'post.php?id=10', '2021-08-30 17:14:48', 'no', 'yes'),
 (7, 'mbutiji_emanuel', 'miki_mouce', 'Miki Mouce liked on your post ', 'post.php?id=9', '2021-08-30 17:14:52', 'yes', 'yes'),
 (8, 'mogo_mouce', 'mbutiji_emanuel', 'Mbutiji Emanuel posted on your profile ', 'post.php?id=40', '2021-09-01 20:58:11', 'yes', 'yes'),
-(9, 'mogo_mouce', 'mbutiji_emanuel', 'Mbutiji Emanuel commented on your profile post ', 'post.php?id=40', '2021-09-01 20:58:19', 'yes', 'yes');
+(9, 'mogo_mouce', 'mbutiji_emanuel', 'Mbutiji Emanuel commented on your profile post ', 'post.php?id=40', '2021-09-01 20:58:19', 'yes', 'yes'),
+(10, 'momo_me', 'mbutiji_emanuel', 'Mbutiji Emanuel posted on your profile ', 'post.php?id=44', '2021-09-03 11:47:21', 'no', 'no'),
+(11, 'mbutiji_emanuel', 'miki_mouce', 'Miki Mouce liked on your post ', 'post.php?id=44', '2021-09-03 11:49:18', 'no', 'yes'),
+(12, 'miki_mouce', 'mbutiji_emanuel', 'Mbutiji Emanuel posted on your profile ', 'post.php?id=67', '2021-09-05 13:55:56', 'no', 'no'),
+(13, 'miki_mouce', 'mbutiji_emanuel', 'Mbutiji Emanuel posted on your profile ', 'post.php?id=73', '2021-09-05 14:57:16', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -231,54 +240,128 @@ CREATE TABLE `posts` (
   `date_added` datetime NOT NULL,
   `user_closed` varchar(3) NOT NULL,
   `deleted` varchar(3) NOT NULL,
-  `likes` int(11) NOT NULL
+  `likes` int(11) NOT NULL,
+  `image` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `body`, `added_by`, `user_to`, `date_added`, `user_closed`, `deleted`, `likes`) VALUES
-(1, 'this is a post', 'mbutiji_emanuel', 'none', '2021-06-10 17:33:55', 'no', 'no', 0),
-(2, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-10 17:34:13', 'no', 'no', 0),
-(3, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 00:53:38', 'no', 'no', 0),
-(4, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 00:53:45', 'no', 'no', 0),
-(5, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 01:25:26', 'no', 'no', 0),
-(6, 'juyfyiyfyit\n', 'mbutiji_emanuel', 'none', '2021-06-11 05:26:58', 'no', 'no', 0),
-(7, 'hello am new herewhats up', 'mogo_mouce', 'none', '2021-06-11 15:18:40', 'no', 'no', 0),
-(8, 'any new stuffs\n', 'mogo_mouce', 'none', '2021-06-11 15:19:01', 'no', 'no', 0),
-(9, 'hello', 'mbutiji_emanuel', 'none', '2021-06-14 02:56:34', 'no', 'no', 2),
-(10, 'hi\n', 'mbutiji_emanuel', 'none', '2021-06-14 02:58:16', 'no', 'no', 2),
-(11, 'welcome to the new world\n', 'mbutiji_emanuel', 'none', '2021-06-15 01:30:36', 'no', 'no', 2),
-(12, 'a beautiful place to be ', 'mbutiji_emanuel', 'none', '2021-06-15 01:30:56', 'no', 'no', 1),
-(13, 'love is very beautiful\n', 'mbutiji_emanuel', 'none', '2021-06-15 01:31:17', 'no', 'yes', 1),
-(14, 'cameroon is a bilingual country', 'mogo_mouce', 'none', '2021-06-15 01:32:57', 'no', 'no', 0),
-(15, 'i am a software developer', 'mogo_mouce', 'none', '2021-06-15 01:33:15', 'no', 'no', 0),
-(16, 'yop yop yop mogo is in the building', 'mogo_mouce', 'none', '2021-06-15 01:33:43', 'no', 'no', 0),
-(17, 'african nations cup on their way to cameroon', 'mogo_mouce', 'none', '2021-06-15 01:34:17', 'no', 'no', 0),
-(18, 'who wants some bread', 'mogo_mouce', 'none', '2021-06-15 01:34:31', 'no', 'no', 0),
-(19, 'my bike is bad', 'mogo_mouce', 'none', '2021-06-15 01:34:39', 'no', 'no', 0),
-(20, 'i need 10k now', 'mogo_mouce', 'none', '2021-06-15 01:34:50', 'no', 'no', 0),
-(21, 'I learn from youtube a lot', 'mogo_mouce', 'none', '2021-06-15 01:35:18', 'no', 'no', 0),
-(22, 'new post by mogo', 'mogo_mouce', 'none', '2021-06-15 04:59:06', 'no', 'no', 0),
-(23, 'hey guys this  is my first post', 'mogo_mouce_1', 'none', '2021-06-17 03:43:47', 'no', 'no', 1),
-(24, 'am just starting  to post here', 'mogo_mouce_1', 'none', '2021-06-17 03:44:03', 'no', 'no', 1),
-(25, 'hello guys am new here whats up. \njust for introduction', 'mbutiji_emanuel_1', 'none', '2021-06-27 00:45:07', 'no', 'no', 0),
-(26, 'jlknix;oiaNB sDOCNoivnioew', 'momo_me', 'mbutiji_emanuel', '2021-06-28 02:18:35', 'no', 'yes', 1),
-(27, 'happy!', 'momo_me', 'none', '2021-06-28 02:33:07', 'no', 'yes', 0),
-(28, 'new day\n', 'momo_me', 'none', '2021-06-28 04:17:24', 'no', 'yes', 0),
-(29, 'well done\n', 'momo_me', 'none', '2021-06-28 04:17:31', 'no', 'yes', 0),
-(30, 'kjmkjuiouoe', 'momo_me', 'none', '2021-06-28 13:53:52', 'no', 'yes', 0),
-(31, 'nkjsHIUDfbcaiuvcaweaifipw3', 'momo_me', 'none', '2021-06-28 15:56:30', 'no', 'yes', 0),
-(32, 'kjBSdfviuqeygvfgf9i', 'momo_me', 'none', '2021-06-28 15:56:33', 'no', 'yes', 0),
-(33, 'kjuiukj', 'mbutiji_emanuel', 'none', '2021-06-29 11:57:46', 'no', 'no', 3),
-(34, 'nk', 'mbutiji_emanuel', 'none', '2021-07-27 17:06:36', 'no', 'yes', 0),
-(35, 'hi mbitiji', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:32:26', 'no', 'no', 1),
-(36, 'greetings friend', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:38:30', 'no', 'no', 1),
-(37, 'this is to test notifications', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:41:54', 'no', 'no', 0),
-(38, 'lets see', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:53:57', 'no', 'no', 0),
-(39, 'this is another test', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 17:14:23', 'no', 'no', 0),
-(40, 'hi', 'mbutiji_emanuel', 'mogo_mouce', '2021-09-01 20:58:11', 'no', 'no', 1);
+INSERT INTO `posts` (`id`, `body`, `added_by`, `user_to`, `date_added`, `user_closed`, `deleted`, `likes`, `image`) VALUES
+(1, 'this is a post', 'mbutiji_emanuel', 'none', '2021-06-10 17:33:55', 'no', 'no', 0, ''),
+(2, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-10 17:34:13', 'no', 'no', 0, ''),
+(3, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 00:53:38', 'no', 'no', 0, ''),
+(4, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 00:53:45', 'no', 'no', 0, ''),
+(5, 'new post made', 'mbutiji_emanuel', 'none', '2021-06-11 01:25:26', 'no', 'no', 0, ''),
+(6, 'juyfyiyfyit\n', 'mbutiji_emanuel', 'none', '2021-06-11 05:26:58', 'no', 'no', 0, ''),
+(7, 'hello am new herewhats up', 'mogo_mouce', 'none', '2021-06-11 15:18:40', 'no', 'no', 0, ''),
+(8, 'any new stuffs\n', 'mogo_mouce', 'none', '2021-06-11 15:19:01', 'no', 'no', 0, ''),
+(9, 'hello', 'mbutiji_emanuel', 'none', '2021-06-14 02:56:34', 'no', 'no', 2, ''),
+(10, 'hi\n', 'mbutiji_emanuel', 'none', '2021-06-14 02:58:16', 'no', 'no', 2, ''),
+(11, 'welcome to the new world\n', 'mbutiji_emanuel', 'none', '2021-06-15 01:30:36', 'no', 'no', 2, ''),
+(12, 'a beautiful place to be ', 'mbutiji_emanuel', 'none', '2021-06-15 01:30:56', 'no', 'no', 1, ''),
+(13, 'love is very beautiful\n', 'mbutiji_emanuel', 'none', '2021-06-15 01:31:17', 'no', 'yes', 1, ''),
+(14, 'cameroon is a bilingual country', 'mogo_mouce', 'none', '2021-06-15 01:32:57', 'no', 'no', 0, ''),
+(15, 'i am a software developer', 'mogo_mouce', 'none', '2021-06-15 01:33:15', 'no', 'no', 0, ''),
+(16, 'yop yop yop mogo is in the building', 'mogo_mouce', 'none', '2021-06-15 01:33:43', 'no', 'no', 0, ''),
+(17, 'african nations cup on their way to cameroon', 'mogo_mouce', 'none', '2021-06-15 01:34:17', 'no', 'no', 0, ''),
+(18, 'who wants some bread', 'mogo_mouce', 'none', '2021-06-15 01:34:31', 'no', 'no', 0, ''),
+(19, 'my bike is bad', 'mogo_mouce', 'none', '2021-06-15 01:34:39', 'no', 'no', 0, ''),
+(20, 'i need 10k now', 'mogo_mouce', 'none', '2021-06-15 01:34:50', 'no', 'no', 0, ''),
+(21, 'I learn from youtube a lot', 'mogo_mouce', 'none', '2021-06-15 01:35:18', 'no', 'no', 0, ''),
+(22, 'new post by mogo', 'mogo_mouce', 'none', '2021-06-15 04:59:06', 'no', 'no', 0, ''),
+(23, 'hey guys this  is my first post', 'mogo_mouce_1', 'none', '2021-06-17 03:43:47', 'no', 'no', 1, ''),
+(24, 'am just starting  to post here', 'mogo_mouce_1', 'none', '2021-06-17 03:44:03', 'no', 'no', 1, ''),
+(25, 'hello guys am new here whats up. \njust for introduction', 'mbutiji_emanuel_1', 'none', '2021-06-27 00:45:07', 'no', 'no', 0, ''),
+(26, 'jlknix;oiaNB sDOCNoivnioew', 'momo_me', 'mbutiji_emanuel', '2021-06-28 02:18:35', 'no', 'yes', 1, ''),
+(27, 'happy!', 'momo_me', 'none', '2021-06-28 02:33:07', 'no', 'yes', 0, ''),
+(28, 'new day\n', 'momo_me', 'none', '2021-06-28 04:17:24', 'no', 'yes', 0, ''),
+(29, 'well done\n', 'momo_me', 'none', '2021-06-28 04:17:31', 'no', 'yes', 0, ''),
+(30, 'kjmkjuiouoe', 'momo_me', 'none', '2021-06-28 13:53:52', 'no', 'yes', 0, ''),
+(31, 'nkjsHIUDfbcaiuvcaweaifipw3', 'momo_me', 'none', '2021-06-28 15:56:30', 'no', 'yes', 0, ''),
+(32, 'kjBSdfviuqeygvfgf9i', 'momo_me', 'none', '2021-06-28 15:56:33', 'no', 'yes', 0, ''),
+(33, 'kjuiukj', 'mbutiji_emanuel', 'none', '2021-06-29 11:57:46', 'no', 'no', 3, ''),
+(34, 'nk', 'mbutiji_emanuel', 'none', '2021-07-27 17:06:36', 'no', 'yes', 0, ''),
+(35, 'hi mbitiji', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:32:26', 'no', 'no', 1, ''),
+(36, 'greetings friend', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:38:30', 'no', 'no', 1, ''),
+(37, 'this is to test notifications', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:41:54', 'no', 'no', 0, ''),
+(38, 'lets see', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 16:53:57', 'no', 'no', 0, ''),
+(39, 'this is another test', 'miki_mouce', 'mbutiji_emanuel', '2021-08-30 17:14:23', 'no', 'no', 0, ''),
+(40, 'hi', 'mbutiji_emanuel', 'mogo_mouce', '2021-09-01 20:58:11', 'no', 'no', 0, ''),
+(41, 'hey guys i love this video <br><iframe width=\'420\' height=\'315\' src=\'https://www.youtube.com/embed/IzpqvggsBXc\'></iframe><br>', 'mbutiji_emanuel', 'none', '2021-09-03 11:38:00', 'no', 'no', 0, ''),
+(42, 'lets check this out <br><iframe width=\'420\' height=\'315\' src=\'https://www.youtube.com/embed/QjMJsQx_O7o\n\'></iframe><br>', 'mbutiji_emanuel', 'none', '2021-09-03 11:39:14', 'no', 'no', 0, ''),
+(43, 'hey <br><iframe width=\'420\' height=\'315\' src=\'https://www.youtube.com/embed/Zn_f6el0TKw\'></iframe><br>', 'mbutiji_emanuel', 'none', '2021-09-03 11:40:16', 'no', 'no', 0, ''),
+(44, 'hi man', 'mbutiji_emanuel', 'momo_me', '2021-09-03 11:47:21', 'no', 'no', 1, ''),
+(45, ' \n', 'miki_mouce', 'none', '2021-09-03 12:12:19', 'no', 'no', 0, ''),
+(46, '<br><iframe width=\'420\' height=\'315\' src=\'https://www.youtube.com/embed/CEw-7cMnBDY\'></iframe><br>', 'miki_mouce', 'none', '2021-09-03 12:19:34', 'no', 'no', 0, ''),
+(47, 'Hello guys am looking foward to start university', 'miki_mouce', 'none', '2021-09-03 13:06:06', 'no', 'no', 0, ''),
+(48, 'good morning everyone', 'miki_mouce', 'none', '2021-09-03 13:07:25', 'no', 'yes', 0, ''),
+(49, 'ji', 'miki_mouce', 'none', '2021-09-03 14:45:20', 'no', 'yes', 0, 'Assets/images/posts613226f0cfdad2.jpg'),
+(50, 'this is cool', 'miki_mouce', 'none', '2021-09-03 14:46:20', 'no', 'yes', 0, ''),
+(51, '', 'miki_mouce', 'none', '2021-09-03 14:57:23', 'no', 'yes', 0, 'Assets/images/posts613229c39aeb76.jpg'),
+(52, '', 'miki_mouce', 'none', '2021-09-03 14:57:33', 'no', 'yes', 0, 'Assets/images/posts613229cdc1f5b6.jpg'),
+(53, '', 'miki_mouce', 'none', '2021-09-03 14:58:13', 'no', 'yes', 0, 'Assets/images/posts613229f5391036.jpg'),
+(54, '', 'miki_mouce', 'none', '2021-09-03 14:58:24', 'no', 'yes', 0, 'Assets/images/posts61322a00d22d75.jpg'),
+(55, '', 'miki_mouce', 'none', '2021-09-03 14:58:39', 'no', 'yes', 0, 'Assets/images/posts61322a0f4c3835.jpg'),
+(56, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 14:58:51', 'no', 'yes', 0, ''),
+(57, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 14:59:43', 'no', 'yes', 0, ''),
+(58, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 15:03:01', 'no', 'yes', 0, ''),
+(59, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 15:03:11', 'no', 'yes', 0, ''),
+(60, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 15:03:14', 'no', 'yes', 0, ''),
+(61, 'hey man how are you doing', 'miki_mouce', 'none', '2021-09-03 15:04:52', 'no', 'yes', 0, ''),
+(62, '', 'mbutiji_emanuel', 'none', '2021-09-03 15:53:28', 'no', 'no', 0, 'Assets/images/posts613236e8d405f1.jpg'),
+(63, 'what is happening', 'mbutiji_emanuel', 'none', '2021-09-03 15:54:33', 'no', 'no', 0, ''),
+(64, 'i love coki ', 'mbutiji_emanuel', 'none', '2021-09-03 16:03:22', 'no', 'no', 0, 'Assets/images/posts6132393a34d8d6.jpg'),
+(65, 'cava bien', 'mbutiji_emanuel', 'none', '2021-09-04 12:10:38', 'no', 'no', 0, 'Assets/images/posts6133542e80f70Screenshot (7).png'),
+(66, 'good morning guys have a blessed sunday', 'mbutiji_emanuel', 'none', '2021-09-05 12:39:51', 'no', 'no', 0, 'Assets/images/posts6134ac87b558bFINDAM_lego.png'),
+(67, 'jjj', 'mbutiji_emanuel', 'miki_mouce', '2021-09-05 13:55:56', 'no', 'no', 0, ''),
+(68, 'kkkk', 'mbutiji_emanuel', 'none', '2021-09-05 13:56:16', 'no', 'no', 0, ''),
+(69, 'lets do this', 'mbutiji_emanuel', 'none', '2021-09-05 14:32:35', 'no', 'no', 0, 'Assets/images/posts6134c6f3438deimage results.PNG'),
+(70, 'k ohhhhhhhh', 'mbutiji_emanuel', 'none', '2021-09-05 14:33:12', 'no', 'no', 0, 'Assets/images/posts6134c718041f1google search.png'),
+(71, 'cool', 'mbutiji_emanuel', 'none', '2021-09-05 14:43:07', 'no', 'no', 0, ''),
+(72, 'je confirme', 'mbutiji_emanuel', 'none', '2021-09-05 14:56:33', 'no', 'no', 0, 'Assets/images/posts6134cc9129caatesla search.png'),
+(73, 'hehehehe', 'mbutiji_emanuel', 'miki_mouce', '2021-09-05 14:57:16', 'no', 'no', 0, 'Assets/images/posts6134ccbcbdba4findam1.PNG');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trends`
+--
+
+CREATE TABLE `trends` (
+  `title` varchar(50) NOT NULL,
+  `hits` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `trends`
+--
+
+INSERT INTO `trends` (`title`, `hits`) VALUES
+('Hello', 1),
+('Guys', 1),
+('Looking', 1),
+('Foward', 1),
+('Start', 1),
+('University', 1),
+('Morning', 1),
+('Ji', 1),
+('Cool', 2),
+('Doing', 6),
+('Happening', 1),
+('Love', 1),
+('Coki', 1),
+('Cava', 1),
+('Bien', 1),
+('Blessed', 1),
+('Sunday', 1),
+('Jjj', 1),
+('Kkkk', 1),
+('Ohhhhhhhh', 1),
+('Je', 1),
+('Confirme', 1),
+('Hehehehe', 1);
 
 -- --------------------------------------------------------
 
@@ -306,13 +389,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `Upassword`, `signup_date`, `profile_pic`, `num_posts`, `num_likes`, `user_closed`, `friend_array`) VALUES
-(1, 'mbiakop', 'clinton', 'mbiakop clinton', 'mbiakopclinton@gmail.com', 'theboss', '2021-06-07', 'theboss', 1, 0, 'no', ''),
-(2, 'Mbutiji', 'Emanuel', 'mbutiji_emanuel', 'Mbutiji1@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/mbutiji_emanuelca131830629be6c9d163caa5a4f26e51n.jpeg', 14, 12, 'no', ',mogo_mouce,miki_mouce,momo_me,dev_pro,clinton_clinton,'),
+(2, 'Mbutiji', 'Emanuel', 'mbutiji_emanuel', 'mbutiji1@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/mbutiji_emanueld2a3f99baf89e2a3bd4feeaf6118bce6n.jpeg', 29, 12, 'no', ',mogo_mouce,dev_pro,clinton_clinton,miki_mouce,'),
 (3, 'Mbutiji', 'Emanuel', 'mbutiji_emanuel_1', 'Manube@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/defaults/head_pete_river.png', 1, 0, 'no', ',mogo_mouce,'),
-(5, 'Miki', 'Mouce', 'miki_mouce', 'Miki@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/defaults/head_deep_blue.png', 1, 2, 'no', ',mbutiji_emanuel,momo_me,clinton_clinton,'),
+(5, 'Miki', 'Mouce', 'miki_mouce', 'Miki@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/defaults/head_deep_blue.png', 13, 2, 'no', ',momo_me,clinton_clinton,mbutiji_emanuel,'),
 (6, 'Mogo', 'Mouce', 'mogo_mouce', 'Mogo@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/mogo_moucee94e9c1c62be8c346254c3236a6b7aadn.jpeg', 11, 0, 'no', ',mbutiji_emanuel,mbutiji_emanuel_1,clinton_clinton,'),
 (7, 'Mogo', 'Mouce', 'mogo_mouce_1', 'Mog@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-08', 'Assets/images/profile_pics/defaults/head_deep_blue.png', 2, 2, 'no', ',mogo_mouce,'),
-(8, 'Momo', 'Me', 'momo_me', 'Momome@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-27', 'Assets/images/profile_pics/defaults/head_pete_river.png', 7, 1, 'no', ',mbutiji_emanuel,miki_mouce,'),
+(8, 'Momo', 'Me', 'momo_me', 'Momome@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-27', 'Assets/images/profile_pics/defaults/head_pete_river.png', 7, 1, 'no', ',miki_mouce,'),
 (9, 'Dev', 'Pro', 'dev_pro', 'Devpro@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-06-27', 'Assets/images/profile_pics/defaults/head_pete_river.png', 0, 0, 'no', ',mbutiji_emanuel,'),
 (10, 'Clinton', 'Clinton', 'clinton_clinton', 'Clinton@gmail.com', 'b248e08d5c23541514558eea059c08cf', '2021-09-01', 'Assets/images/profile_pics/defaults/head_deep_blue.png', 0, 0, 'no', ',mbutiji_emanuel,mogo_mouce,miki_mouce,');
 
@@ -376,31 +458,31 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `friend_requests`
 --
 ALTER TABLE `friend_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `users`

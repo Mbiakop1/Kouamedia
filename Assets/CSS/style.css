@@ -632,6 +632,6 @@ nav a:hover {
 
 /*  the upload image button */
 
-.main_column form button {
+#select_image {
     margin: 5px;
 }

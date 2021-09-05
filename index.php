@@ -78,8 +78,7 @@ if(isset($_POST['post'])){
         <button id="select_image" class="btn btn-primary" type="button"
             onclick="document.getElementById('fileToUpload').click()">Add
             Image</button>
-        <input onchange="myFunction(event)" type="file" name="fileToUpload" id="fileToUpload"
-            style="visibility:hidden;">
+        <input onchange="myFunction(event)" type="file" name="fileToUpload" id="fileToUpload" style="display:none;">
         <textarea name="post_text" id="post_text" placeholder="Got something to say?"></textarea>
         <input type="submit" name="post" id="post_button" value="Post">
         <hr>

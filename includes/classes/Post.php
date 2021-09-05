@@ -168,7 +168,6 @@ class Post {
               $num_iterations = 0; // Number of results checked (not necasserily posted)
               $count = 1; 
 
-                
                 while($row =mysqli_fetch_array($data_query)){
                     $id = $row['id'];
                     $body = $row['body'];
@@ -436,6 +435,8 @@ $(document).ready(function() {
                     $body = $row['body'];
                     $added_by = $row['added_by'];
                     $date_time = $row['date_added'];
+                    $imagePath = $row['image'];
+                     
                     
 
                      
@@ -563,6 +564,14 @@ function toggle<?php echo $id;?>() {
                                     $time_massage = $interval->s . " Seconds ago";
                                 }
                             }
+
+                             if($imagePath != ""){
+                                        $imageDiv = "<div class='postedImage'>
+                                                       <img src='$imagePath'>
+                                                     </div>";
+                                    } else {
+                                        $imageDiv = "";
+                                    }
                             
                             
                             $str .= "<div class ='status_post' onClick='javascript:toggle$id()'>
@@ -578,6 +587,7 @@ function toggle<?php echo $id;?>() {
                                 <div id='post_body'>
                                  $body
                                 <br>
+                                $imageDiv
                                 </div>
                                 <br><br>
 

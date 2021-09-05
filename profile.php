@@ -43,6 +43,57 @@ if(isset($_POST['post_message'])){
     </script>";
 }
 
+//  submit profile postss
+
+
+if(isset($_POST['post'])){
+   $upLoadOk = 1;
+
+   $imageName = $_FILES['fileToUpload']['name'];
+   $errorMessage = "";
+
+   if($imageName != ""){
+       $targetDir = "Assets/images/posts";
+       $imageName = $targetDir . uniqid() . basename($imageName);
+       $imageFileType = pathinfo($imageName, PATHINFO_EXTENSION);
+
+       if($_FILES['fileToUpload']['size'] > 10000000){
+          $errorMessage = "Sorry your file is too large";
+          $upLoadOk = 0;
+       }
+
+       if(strtolower($imageFileType) != "jpeg" && strtolower($imageFileType) != "jpg" && strtolower($imageFileType) != "png"){
+            $errorMessage = "Sorry only jpeg, jpg and png files are allowed";
+          $upLoadOk = 0;
+       }
+
+       if($upLoadOk){
+           if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $imageName)){
+            //    image uploaded
+           } else {
+            //    image did not upload
+            $upLoadOk = 0;
+           }
+       }
+   }
+
+
+ if($upLoadOk){
+   
+    $post = new Post($con, $userLoggedIn);
+    $post->submitPost($_POST['post_body'], $_POST['user_to'], $imageName);
+    $username = $_POST['user_to'];
+    header("Location: $username");
+ } else {
+     echo "<div style='text-align:center;' class='alert alert-danger'>
+               $errorMessage
+          </div>";
+ }
+}
+
+
+
+
 ?>
 <style>
 .wrapper {
@@ -204,13 +255,17 @@ if(isset($_POST['post_message'])){
             </div>
             <div class="modal-body">
                 <p>This will appear on the user's profile and also their newsfeed for your friends to see</p>
-                <form id="profile_post" class="profile_post" action="" method="POST" enctype="multipart/form-data">
-
-                    <input type="file" name="fileToUpload" id="profileFileileToUpload">
+                <form id="profile_post" class="profile_post" action="profile.php" method="POST"
+                    enctype="multipart/form-data">
+                    <button id="select_image" class="btn btn-primary" type="button"
+                        onclick="document.getElementById('fileToUpload').click()">Add
+                        Image</button>
+                    <input onchange="myFunction(event)" type="file" name="fileToUpload" id="fileToUpload"
+                        style="display:none;">
                     <textarea class="form-control" name="post_body"></textarea>
                     <input type="hidden" name="user_from" value="<?php echo $userLoggedIn;?>">
                     <input type="hidden" name="user_to" value="<?php echo $username;?>">
-
+                    <input id="submit_profile_post_btn" type="submit" name="post" style="display: none;">
                 </form>
             </div>
 

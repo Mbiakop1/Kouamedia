@@ -13,9 +13,13 @@ $(document).ready(function() {
     // button for profile post
     $('#submit_profile_post').click(function() {
 
-        var formData = new FormData(document.getElementById('profile_post'));
+        $("#submit_profile_post_btn").trigger("click");
+        // var formData = new FormData(document.getElementById('profile_post'));
 
-        console.log(formData);
+        // var img = formData.get("fileToUpload");
+        // // var message = formData.get("post_body");
+
+
 
         // $.ajax({
         //     type: "POST",
