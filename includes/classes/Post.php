@@ -111,7 +111,9 @@ class Post {
              if(strpos($no_punctuation, "height") === false && strpos($no_punctuation, "width") === false &&
                strpos($no_punctuation, "http") === false){
                    $no_punctuation = preg_split("/[\s,]+/", $no_punctuation);
-               }
+             } else {
+                 $no_punctuation = array();
+             }
 
                foreach($stopWords as $value){
                    foreach($no_punctuation as $key => $value2){
