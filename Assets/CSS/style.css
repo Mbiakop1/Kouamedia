@@ -635,3 +635,10 @@ nav a:hover {
 #select_image {
     margin: 5px;
 }
+
+
+/* style posted youtube videos */
+
+iframe#videoIframe {
+    width: 100%;
+}
