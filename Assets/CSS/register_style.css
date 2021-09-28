@@ -25,7 +25,6 @@ a {
     width: 100vw;
     background-image: url(../images/backgrounds/desktop\ top\ view.jpg);
     background-size: cover;
-    min-width: 950px;
 }
 
 .login_box {
@@ -35,6 +34,7 @@ a {
     margin-left: auto;
     top: 7%;
     width: 35%;
+    min-width: 240px;
     background-color: #ffffff;
     border: 1px solid #EDEDED;
     padding: 5px;
