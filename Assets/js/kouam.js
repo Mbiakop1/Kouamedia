@@ -123,3 +123,7 @@ function myFunction(event) {
     const filename = event.target.files[0].name;
     document.getElementById("select_image").textContent = 'File selected: ' + filename;
 }
+
+function toggle() {
+    document.getElementById('nav_content').classList.toggle("active");
+}

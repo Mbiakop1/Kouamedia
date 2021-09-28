@@ -8,10 +8,11 @@ a {
     height: 40px;
     background-color: #21ca70;
     border-bottom: 0.25em solid #0ca754;
-    min-width: 1015px;
+    /* min-width: 1015px; */
     margin: 0 0 10px 0;
-    display: inline-flex;
+    display: flex;
     position: fixed;
+    justify-content: space-between;
     z-index: 10;
 }
 
@@ -37,11 +38,14 @@ nav a {
     margin: 5px;
 }
 
+
+/*  styling the nav88888************************************************************************************************************* */
+
 nav {
-    float: right;
-    right: 1px;
-    position: absolute;
-    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 3;
 }
 
 nav a:hover {
@@ -493,7 +497,11 @@ nav a:hover {
 }
 
 .search {
-    margin: 8px 0 0 15%;
+    /* margin: 8px 0 0 15%; */
+}
+
+.search input {
+    max-width: 200px;
 }
 
 .search #search_text_input {
@@ -541,6 +549,17 @@ nav a:hover {
     border-top: none;
     background-color: #2ecc71;
     text-align: center;
+}
+
+
+/* styling the navbar  */
+
+.nav_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    transition: height 1s;
 }
 
 .search_results_footer a {
@@ -641,4 +660,46 @@ nav a:hover {
 
 iframe#videoIframe {
     width: 100%;
+}
+
+
+/* menu icon */
+
+.menu_icon {
+    position: absolute;
+    right: 2px;
+    visibility: hidden;
+}
+
+
+/* mobile responsive************************************** */
+
+@media screen and (max-width: 1000px) {
+    .nav_content {
+        width: 0px;
+        height: 0px;
+    }
+    .dropdown_data_window {
+        width: 65%;
+        max-width: 600px;
+        min-width: 200px;
+    }
+    .active {
+        width: 100%;
+        height: 90vh;
+        background-color: #21ca70;
+        display: flex;
+        flex-direction: column;
+        top: 40px;
+        justify-content: center;
+        position: absolute;
+        padding: 20px 0px;
+    }
+    .menu_icon {
+        visibility: initial;
+    }
+    .nav_icons {
+        flex-direction: column;
+        justify-content: space-around;
+    }
 }
