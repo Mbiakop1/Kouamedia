@@ -54,22 +54,45 @@ if(isset($_POST['post'])){
    
 ?>
 
+<div class="side_details">
 
-<div class="user_details column">
-    <a href="<?php echo $userLoggedIn;?>"> <img src="<?php echo $user['profile_pic']?>" alt="Profile picture"> </a>
-    <div class="user_details_left_right">
-        <a href="<?php echo $userLoggedIn;?>">
-            <?php
+    <div class="user_details column">
+        <a href="<?php echo $userLoggedIn;?>"> <img src="<?php echo $user['profile_pic']?>" alt="Profile picture"> </a>
+        <div class="user_details_left_right">
+            <a href="<?php echo $userLoggedIn;?>">
+                <?php
               echo $user['first_name'] . " " . $user['last_name'];
             ?>
-        </a><br>
+            </a><br>
 
-        <?php 
+            <?php 
             echo "Posts: " . $user['num_posts'] . "<br>";
             echo "Likes: " . $user['num_likes'];
         ?>
+        </div>
+
     </div>
 
+    <div class="user_details column">
+        <h4>Popular</h4>
+        <div class="trends">
+            <?php
+            $query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
+
+            foreach($query as $row){
+                $word  = $row['title'];
+                $word_dot = strlen($word) >= 14 ? "..." : "";
+
+                $trimmed_word = str_split($word, 14);
+                $trimmed_word = $trimmed_word[0];
+
+                echo "<div style='padding: 5px'>";
+                echo  $trimmed_word . $word_dot;
+                echo "<br></div>";
+            }
+         ?>
+        </div>
+    </div>
 </div>
 
 <div class="main_column column">
@@ -94,26 +117,7 @@ if(isset($_POST['post'])){
 
 </div>
 
-<div class="user_details column">
-    <h4>Popular</h4>
-    <div class="trends">
-        <?php
-            $query = mysqli_query($con, "SELECT * FROM trends ORDER BY hits DESC LIMIT 9");
 
-            foreach($query as $row){
-                $word  = $row['title'];
-                $word_dot = strlen($word) >= 14 ? "..." : "";
-
-                $trimmed_word = str_split($word, 14);
-                $trimmed_word = $trimmed_word[0];
-
-                echo "<div style='padding: 5px'>";
-                echo  $trimmed_word . $word_dot;
-                echo "<br></div>";
-            }
-         ?>
-    </div>
-</div>
 
 <script>
 var userLoggedIn = '<?php echo $userLoggedIn?>';

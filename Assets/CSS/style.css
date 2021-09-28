@@ -57,8 +57,13 @@ nav a:hover {
     top: 50px;
     position: relative;
     padding: 0 10px;
-    width: 75%;
+    width: 80%;
     min-width: 950px;
+    display: flex;
+}
+
+.side_details {
+    flex: 1;
 }
 
 .column {
@@ -90,7 +95,7 @@ nav a:hover {
 .main_column {
     float: right;
     width: 70%;
-    z-index: -1;
+    z-index: 1;
     min-height: 170px;
 }
 
@@ -679,10 +684,22 @@ iframe#videoIframe {
         width: 0px;
         height: 0px;
     }
+    .side_details {
+        display: flex;
+    }
     .dropdown_data_window {
         width: 65%;
         max-width: 600px;
         min-width: 200px;
+    }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        min-width: initial;
+        padding: 0px;
     }
     .active {
         width: 100%;
@@ -701,5 +718,8 @@ iframe#videoIframe {
     .nav_icons {
         flex-direction: column;
         justify-content: space-around;
+    }
+    .side_details {
+        width: 70%;
     }
 }
