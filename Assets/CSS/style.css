@@ -64,6 +64,7 @@ nav a:hover {
 
 .side_details {
     flex: 1;
+    z-index: 1;
 }
 
 .column {
@@ -347,7 +348,6 @@ nav a:hover {
 
 #message_submit {
     height: 41px;
-    width: 120px;
     margin: 0;
     position: absolute;
     border: none;
