@@ -329,7 +329,7 @@ nav a:hover {
     min-width: 675px;
     float: left;
     width: 70%;
-    z-index: -1;
+    z-index: 1;
     margin-left: 10px;
 }
 
@@ -680,6 +680,10 @@ iframe#videoIframe {
 /* mobile responsive************************************** */
 
 @media screen and (max-width: 1000px) {
+    .profile_info_bottom {
+        margin: 10px 0px 0px 7px;
+        color: black !important;
+    }
     .nav_content {
         width: 0px;
         height: 0px;
@@ -701,7 +705,7 @@ iframe#videoIframe {
         min-width: initial;
         padding: 0px;
     }
-    .active {
+    .toggle_menu {
         width: 100%;
         height: 90vh;
         background-color: #21ca70;
@@ -721,5 +725,73 @@ iframe#videoIframe {
     }
     .side_details {
         width: 70%;
+    }
+    /* the profile page******************* */
+    .profile_left {
+        display: flex;
+        max-width: 70%;
+        width: 70%;
+        top: initial;
+        height: 100px;
+        align-items: center;
+        background-color: transparent;
+        color: rgb(203, 234, 248);
+        border: none;
+    }
+    .profile_left img {
+        width: 55px;
+        margin: 20px;
+        border: 5px solid #0ca754;
+        border-radius: 70px;
+    }
+}
+
+
+/* screen lesser than 500px */
+
+@media screen and (max-width: 500px) {
+    .profile_left {
+        max-width: 100vw;
+        width: 100vw;
+    }
+}
+
+
+/*  screen lesser than 650px************** */
+
+@media screen and (max-width: 650px) {
+    .profile_main_column {
+        min-width: initial;
+        float: right;
+        width: 100%;
+        z-index: 1;
+        margin-left: 0px;
+    }
+    .profile_left {
+        flex-wrap: wrap;
+        height: auto;
+    }
+    .profile_left .profile_info {
+        width: auto;
+    }
+    .profile_left input[type="submit"] {
+        width: auto;
+    }
+}
+
+
+/*  screen lesser than 350px************ */
+
+@media screen and (max-width: 350px) {
+    .profile_left img {
+        width: 45px;
+        margin: 5px;
+        min-width: initial;
+    }
+    .profile_left .profile_info {
+        padding: 0px;
+    }
+    .profile_left .profile_info p {
+        font-size: 12px;
     }
 }

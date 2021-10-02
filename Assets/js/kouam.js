@@ -125,5 +125,5 @@ function myFunction(event) {
 }
 
 function toggle() {
-    document.getElementById('nav_content').classList.toggle("active");
+    document.getElementById('nav_content').classList.toggle("toggle_menu");
 }
