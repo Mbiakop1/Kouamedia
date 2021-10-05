@@ -123,7 +123,10 @@ if(isset($_POST['register_button'])){
         }
         
 
-        $query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',' )");
+        $query = mysqli_query($con, "INSERT INTO users
+         (first_name, last_name, username, email, Upassword, signup_date, profile_pic, num_posts, num_likes, user_closed, friend_array)
+          VALUES
+        ('$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',' )");
 
         array_push($error_array, "<span style='color:#14c800'>You're all set! go ahead and login! </span>");
 

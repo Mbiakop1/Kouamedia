@@ -757,6 +757,18 @@ iframe#videoIframe {
 }
 
 
+/*  screen lesser than 830px */
+
+@media screen and (max-width: 830px) {
+    .main_column {
+        width: 100%;
+    }
+    .side_details {
+        width: 100%;
+    }
+}
+
+
 /*  screen lesser than 650px************** */
 
 @media screen and (max-width: 650px) {

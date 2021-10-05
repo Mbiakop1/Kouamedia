@@ -33,7 +33,12 @@ class Post {
                 if(strpos($value, "www.youtube.com/watch?v=") !== false){
                     $link = preg_split("!&!", $value);
                     $value = preg_replace("!watch\?v=!", "embed/", $link[0]);
-                    $value  = "<br><iframe id=\'videoIframe\'  height=\'400\' src=\'" . $value ."\'></iframe><br>";
+                    $value  = "<br><iframe id=\'videoIframe\'  height=\'400\'  src=\'" . $value ."\'
+                     title=\'YouTube video player\'
+                     frameborder = \'0\'
+                     allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\'
+                     allowfullscreen
+                     ></iframe><br>";
                     $body_array[$key] = $value;
                 }
             }
@@ -50,8 +55,9 @@ class Post {
                 $user_to = "none";
             }
             // insert post to db
-            $query = mysqli_query($this->con, "INSERT INTO posts VALUES(
-                '', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
+            $query = mysqli_query($this->con, "INSERT INTO posts
+             (body, added_by, user_to, date_added, user_closed, deleted, likes, image) 
+             VALUES('$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
                 )");
                 
                 $returned_id = mysqli_insert_id($this->con);
@@ -129,8 +135,9 @@ class Post {
 
                 
          } else if($imageName){
-              $query = mysqli_query($this->con, "INSERT INTO posts VALUES(
-                '', '', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
+              $query = mysqli_query($this->con, "INSERT INTO posts
+               (body, added_by, user_to, date_added, user_closed, deleted, likes, image)
+                VALUES( '', '$added_by', '$user_to', '$date_added', 'no', 'no', '0', '$imageName'
                 )");
          }
     } 
